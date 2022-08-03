@@ -7,7 +7,7 @@ export default styles = StyleSheet.create({
     height: 300,
   },
   ScrollableList: {
-    height: 170,
+    height: 300,
   },
   MealDataContainer: {
     flexGrow: 1,
@@ -34,5 +34,14 @@ export default styles = StyleSheet.create({
     padding: 8,
     fontWeight: "bold",
     fontSize: 18,
+  },
+  StepsText: {
+    color: "black",
+    paddingLeft: 15,
+    marginLeft: 12,
+    marginBottom: 10,
+    fontSize: 16,
+    borderLeftWidth: 4,
+    borderLeftColor: "#f5a442",
   },
 });

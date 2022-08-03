@@ -26,7 +26,6 @@ export default function MainScreen() {
           component={MealDetailsScreen}
           options={{
             headerTransparent: true,
-            //headerTintColor: "#C91C22",
             headerTitle: "",
           }}
         />
