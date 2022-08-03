@@ -1,4 +1,10 @@
-import { FlatList, StyleSheet, Text, ImageBackground } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  ImageBackground,
+  View,
+} from "react-native";
 import CategoryItem from "../components/CategoryItem";
 import { CATEGORIES } from "../data/dummy-data";
 import { useNavigation } from "@react-navigation/native";
