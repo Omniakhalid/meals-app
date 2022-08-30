@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { FavoritesScreen } from "./FavoritesScreen";
+import FavoritesContextProvider from "../store/context/favorites-context";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -28,23 +29,37 @@ function DrawerNavigator() {
 }
 export default function MainScreen() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Drawer"
-          component={DrawerNavigator}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Meals" component={MealsScreen} />
-        <Stack.Screen
-          name="Details"
-          component={MealDetailsScreen}
-          options={{
-            headerTransparent: true,
-            headerTitle: "",
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <FavoritesContextProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Drawer"
+            component={DrawerNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Meals"
+            component={MealsScreen}
+            options={{
+              headerStyle: {
+                //#991317 C91C22  red
+                backgroundColor: "#C91C22",
+                borderBottomEndRadius: 30,
+                borderBottomStartRadius: 30,
+              },
+              headerTintColor: "white",
+            }}
+          />
+          <Stack.Screen
+            name="Details"
+            component={MealDetailsScreen}
+            options={{
+              headerTransparent: true,
+              headerTitle: "",
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </FavoritesContextProvider>
   );
 }

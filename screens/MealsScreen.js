@@ -1,9 +1,8 @@
 import { MEALS } from "../data/dummy-data";
-import MealItem from "../components/MealItem";
-import { ImageBackground, StyleSheet, FlatList } from "react-native";
 import { CATEGORIES } from "../data/dummy-data";
 import { useNavigation } from "@react-navigation/native";
 import { useLayoutEffect } from "react";
+import MealsList from "../components/MealsList";
 
 export default function MealsScreen({ route }) {
   const { categoryId } = route.params;
@@ -22,22 +21,6 @@ export default function MealsScreen({ route }) {
   const fetchedMeals = MEALS.filter(
     (id) => id.categoryIds.indexOf(categoryId) >= 0
   );
-  return (
-    <ImageBackground
-      source={require("../assets/images/background.jpg")}
-      resizeMode="cover"
-      style={styles.BackgroundContainer}
-      imageStyle={styles.ImageBackground}
-    >
-      <FlatList
-        data={fetchedMeals}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <MealItem MealItem={item} />}
-      />
-    </ImageBackground>
-  );
+
+  return <MealsList items={fetchedMeals} />;
 }
-const styles = StyleSheet.create({
-  BackgroundContainer: { flex: 1 },
-  ImageBackground: { opacity: 0.1 },
-});

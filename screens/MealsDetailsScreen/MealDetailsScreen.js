@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import {
   ImageBackground,
   Image,
@@ -13,18 +13,35 @@ import List from "../../components/List";
 import { MEALS } from "../../data/dummy-data";
 import styles from "./MealDetailsStyle";
 import IconButton from "../../components/IconButton";
+import { FavoritesContext } from "../../store/context/favorites-context";
 export default function MealDetailsScreen({ route }) {
   const navigation = useNavigation();
   const { mealId } = route.params;
+
+  //      3- useContext to get data from context 'value'
+  const favoriteMealsContext = useContext(FavoritesContext);
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
-  function handleOnPress() {}
+  const mealIsFavorite = favoriteMealsContext.ids.includes(mealId);
+  function handleFavBtn() {
+    if (mealIsFavorite == false) {
+      favoriteMealsContext.addFavorite(mealId);
+    } else {
+      favoriteMealsContext.removeFavorite(mealId);
+    }
+  }
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
-        return <IconButton icon="heart" color={"white"} />;
+        return (
+          <IconButton
+            icon={mealIsFavorite ? "star" : "star-outline"}
+            color={"white"}
+            onPress={handleFavBtn}
+          />
+        );
       },
     });
-  }, [navigation, handleOnPress]);
+  }, [navigation, handleFavBtn]);
   return (
     <ImageBackground
       source={require("../../assets/images/background.jpg")}
